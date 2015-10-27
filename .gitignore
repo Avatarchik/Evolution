@@ -3,3 +3,5 @@ EvolutionUnity/obj/
 EvolutionUnity/*.csproj
 EvolutionUnity/*.sln
 EvolutionUnity/*.suo
+EvolutionUnity/Temp/
+Builds/
