@@ -7,6 +7,7 @@ using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using MyUtils;
 
 public class Socket : UnitySingleton<Socket> {
     /// <summary>
@@ -32,7 +33,7 @@ public class Socket : UnitySingleton<Socket> {
     /// <summary>
     /// Залогиниться не удалось
     /// </summary>
-    Action OnLoginError;
+    Action<int> OnLoginError;
 
     /// <summary>
     /// Успешно вошли в комнату
@@ -132,6 +133,21 @@ public class Socket : UnitySingleton<Socket> {
         }
     }
     private bool _isLoging = false;
+
+    void Awake()
+    {
+        SetCustomErrorCodes();
+    }
+
+    /// <summary>
+    /// Устанавливаю кастомные коды ошибок
+    /// </summary>
+    void SetCustomErrorCodes()
+    {
+        SFSErrorCodes.SetErrorMessage(1000, "Client version: {0} - invalid");
+        SFSErrorCodes.SetErrorMessage(1001, "Database problem");
+        SFSErrorCodes.SetErrorMessage(1002, "Incorrect username lenght. Username: {0}");
+    }
 
     void FixedUpdate()
     {
@@ -323,7 +339,19 @@ public class Socket : UnitySingleton<Socket> {
         if (IsLoged || IsLoging)
             return;
         _isLoging = true;
-        _server.Send(new LoginRequest(Timer.Instance.UStampInMSecs.ToString().MD5()));
+
+        ISFSObject loginInData = new SFSObject();
+        loginInData.PutUtfString("version", Version.CurrentBundle);
+        loginInData.PutUtfString("platform", Application.platform.ToStr());
+        loginInData.PutUtfString("facebookId", "");
+
+        _server.Send(
+            new LoginRequest(
+                    Utils.UniqueDeviceID.MD5(),
+                    null,
+                    Settings.ZoneName,
+                    loginInData)
+            );
     }
 
     /// <summary>
@@ -349,7 +377,7 @@ public class Socket : UnitySingleton<Socket> {
     private void OnLoginToServerError(BaseEvent be)
     {
         LogMessage(LogLevel.INFO, "Login failed: " + (string)be.Params["errorMessage"]);
-        LoginError();
+        LoginError(Convert.ToInt32(be.Params["errorCode"]));
     }
 
     /// <summary>
@@ -368,11 +396,11 @@ public class Socket : UnitySingleton<Socket> {
     /// <summary>
     /// Ошибка при логине
     /// </summary>
-    private void LoginError()
+    private void LoginError(int code)
     {
         _isLoging = false;
         if (OnLoginError != null)
-            OnLoginError();
+            OnLoginError(code);
         Disconnect();
     }
     #endregion

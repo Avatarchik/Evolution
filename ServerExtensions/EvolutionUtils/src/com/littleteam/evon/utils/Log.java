@@ -18,7 +18,7 @@ public class Log {
      * @param extension - расширение
      * @param message - сообщение
      */
-    public static void Info(SFSExtension extension, String message) {
+    public static void Info(SFSExtension extension, Object message) {
         extension.trace(ExtensionLogLevel.INFO, message);
     }
 
@@ -26,8 +26,15 @@ public class Log {
      * @param extension - расширение
      * @param message - сообщение
      */
-    public static void Warning(SFSExtension extension, String message) {
+    public static void Warning(SFSExtension extension, Object message) {
         extension.trace(ExtensionLogLevel.WARN, message);
     }
 
+    /**
+     * @param extension - расширение
+     * @param message - сообщение
+     */
+    public static void Error(SFSExtension extension, Object message) {
+        extension.trace(ExtensionLogLevel.ERROR, message);
+    }
 }

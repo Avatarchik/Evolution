@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using MyUtils;
 
 public class Main : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class Main : MonoBehaviour {
         Application.targetFrameRate = 60;
 
 #if UNITY_IOS || UNITY_ANDROID
-        if (IsBigScreen())
+        if (Utils.IsNiceScreen())
             ReduceResolutionOf(2);
 #endif
     }
@@ -41,15 +42,6 @@ public class Main : MonoBehaviour {
     void LoadFirstLevel()
     {
         Application.LoadLevel(1);
-    }
-
-    /// <summary>
-    /// Экран большой?
-    /// </summary>
-    /// <returns></returns>
-    bool IsBigScreen()
-    {
-        return Screen.currentResolution.width > 1280 && Screen.currentResolution.height > 800 && Screen.dpi > 240f;
     }
 
     /// <summary>

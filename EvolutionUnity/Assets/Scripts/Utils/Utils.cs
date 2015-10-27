@@ -1,10 +1,11 @@
 ﻿namespace MyUtils
 {
     using System.Net.NetworkInformation;
+    using UnityEngine;
 
     public static class Utils
     {
-
+#if !UNITY_IOS && ! UNITY_ANDROID
         /// <summary>
         /// Получить MAC адрес устройства
         /// </summary>
@@ -31,6 +32,27 @@
             }
 
             return macAddress;
+        }
+#endif
+        /// <summary>
+        /// Уникальный ID для каждой инсталяции
+        /// </summary>
+        /// <returns></returns>
+        public static string UniqueDeviceID
+        {
+            get
+            {
+                return SystemInfo.deviceUniqueIdentifier;
+            }
+        }
+        
+        /// <summary>
+        /// Монитор хороший?
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsNiceScreen()
+        {
+            return Screen.currentResolution.width > 1280 && Screen.currentResolution.height > 800 && Screen.dpi > 240f;
         }
 
     }

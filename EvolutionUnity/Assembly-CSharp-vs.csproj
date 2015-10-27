@@ -47,19 +47,20 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Game.cs" />
+     <Compile Include="Assets\Scripts\GentleMonoBeh.cs" />
+     <Compile Include="Assets\Scripts\Helpers\EnumHelper.cs" />
      <Compile Include="Assets\Scripts\Helpers\StringHelper.cs" />
+     <Compile Include="Assets\Scripts\IGentleMonoBeh.cs" />
      <Compile Include="Assets\Scripts\ISavable.cs" />
-     <Compile Include="Assets\Scripts\ISmartFoxSocket.cs" />
+     <Compile Include="Assets\Scripts\IUnitySingleton.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
-     <Compile Include="Assets\Scripts\Other\GentleMonoBeh.cs" />
-     <Compile Include="Assets\Scripts\Other\IGentleMonoBeh.cs" />
-     <Compile Include="Assets\Scripts\Other\IUnitySingleton.cs" />
-     <Compile Include="Assets\Scripts\Other\Log.cs" />
-     <Compile Include="Assets\Scripts\Other\UnitySingleton.cs" />
-     <Compile Include="Assets\Scripts\Other\Utils.cs" />
      <Compile Include="Assets\Scripts\Socket.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
-     <Compile Include="Assets\Scripts\Timer.cs" />
+     <Compile Include="Assets\Scripts\Timers.cs" />
+     <Compile Include="Assets\Scripts\UnitySingleton.cs" />
+     <Compile Include="Assets\Scripts\Utils\Log.cs" />
+     <Compile Include="Assets\Scripts\Utils\Utils.cs" />
+     <Compile Include="Assets\Scripts\Version.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

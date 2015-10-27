@@ -19,6 +19,7 @@ public class EvonZoneExtension extends SFSExtension{
     @Override
     public void init() {
         addEventHandler(SFSEventType.USER_DISCONNECT, LeaveUser.class);
+        addEventHandler(SFSEventType.USER_LOGIN, LoginEventHandler.class); 
         Log.Info(this, "Evon Zone Extension Initalized");
     }
     

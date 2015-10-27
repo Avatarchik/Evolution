@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public class Timer : UnitySingleton<Timer> {
+public class Timers : UnitySingleton<Timers> {
 
     /// <summary>
     /// Unix Time Stamp (время от 1970) в секундах

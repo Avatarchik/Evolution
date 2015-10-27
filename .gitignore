@@ -5,3 +5,4 @@ EvolutionUnity/*.sln
 EvolutionUnity/*.suo
 EvolutionUnity/Temp/
 Builds/
+/ServerExtensions/EvolutionZoneExtension/dist/
