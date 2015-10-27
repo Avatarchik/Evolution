@@ -1,0 +1,5 @@
+EvolutionUnity/Library/
+EvolutionUnity/obj/
+EvolutionUnity/*.csproj
+EvolutionUnity/*.sln
+EvolutionUnity/*.suo
