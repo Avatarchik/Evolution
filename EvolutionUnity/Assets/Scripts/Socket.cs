@@ -134,8 +134,9 @@ public class Socket : UnitySingleton<Socket> {
     }
     private bool _isLoging = false;
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         SetCustomErrorCodes();
     }
 
@@ -454,17 +455,16 @@ public class Socket : UnitySingleton<Socket> {
         RoomJoinError();
     }
 
-    /// <summary>
+    /*/// <summary>
     /// Какойто пользователь покинул комнату
     /// </summary>
     /// <param name="be"></param>
     private void OnServerRoomLeave(BaseEvent be)
     {
-        throw new Exception("Метод OnServerRoomLeave отключен");
         Room room = (Room)be.Params["room"];
         User user = (User)be.Params["user"];
         LogMessage(LogLevel.INFO, "Leave room: " + room.Name + ", user: " + user.Name);
-    }
+    }*/
 
     /// <summary>
     /// Успешно вошли в комнату

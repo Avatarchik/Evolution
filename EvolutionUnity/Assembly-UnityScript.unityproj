@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{4E17CFE6-17BD-00CF-3C98-30D99F49D4D7}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_1_2;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Extensions\AndroidNative\xExample\Scripts\JS\JSUseExample.js" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_button.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\OneSignalSDK.txt" />
+     <None Include="Assets\Plugins\StansAssets\Android\res\values\analytics.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_background.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_image.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_search_bar_layout.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment_list_row.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\google_play\google-play-services.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-iw\strings.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_friendpickerfragment.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values\strings.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\social\twitter4j-core-3.0.5.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
+     <None Include="Assets\Plugins\Android\res\values\ids.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_like_selected.xml" />
+     <None Include="Assets\Plugins\Android\facebook\build.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-hdpi\dimens.xml" />
+     <None Include="Assets\Extensions\AndroidManifestManager\default.xml" />
+     <None Include="Assets\Extensions\AndroidNative\Documentation\AN_VersionNotes.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\values\colors.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values\styles.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
+     <None Include="Assets\Plugins\Android\res\values\analytics.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values\drawables.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\libs\image-chooser-library-1.3.0.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
+     <None Include="Assets\Plugins\Android\res\values\version.xml" />
+     <None Include="Assets\Plugins\Android\facebook\proguard-project.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\values\attrs.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-es\strings.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\app_licensing\an_licensing_library.txt" />
+     <None Include="Assets\Plugins\Android\res\xml\file_paths.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
+     <None Include="Assets\Plugins\StansAssets\Versions\MSP_VersionInfo.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_login_activity_layout.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_item_background.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\values-he\strings.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\libs\android-support-v4.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\google_play\an_googleplay.txt" />
+     <None Include="Assets\Plugins\StansAssets\Android\billing\an_billing.txt" />
+     <None Include="Assets\Plugins\StansAssets\Android\social\an_social.txt" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\StansAssets\IOS\ISN_NativeCore.mm.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_check.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_top_button.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_like.xml" />
+     <None Include="Assets\Plugins\StansAssets\IOS\ISN_SocialGate.mm.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar_stub.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\res\values\version.xml" />
+     <None Include="Assets\Plugins\StansAssets\IOS\ISN_NativeCore.h.txt" />
+     <None Include="Assets\Plugins\StansAssets\Android\res\xml\file_paths.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\res\values\ids.xml" />
+     <None Include="Assets\Plugins\StansAssets\Versions\AN_VersionInfo.txt" />
+     <None Include="Assets\Extensions\StansAssetsCommon\SA_FB_PlaceHolder.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_usersettingsfragment_background_gradient.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\androidnative.txt" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_section_header.xml" />
+     <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_checkbox.xml" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="IFacebook">
+ <HintPath>E:/Unity5_Projects/Evolution/EvolutionUnity/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ </Reference>
+ <Reference Include="SmartFox2X">
+ <HintPath>E:/Unity5_Projects/Evolution/EvolutionUnity/Assets/Plugins/SmartFox2X.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
