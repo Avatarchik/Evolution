@@ -19,7 +19,7 @@ public class Timers : UnitySingleton<Timers> {
     /// <summary>
     /// Unix Time Stamp (время от 1970) в секундах
     /// </summary>
-    public static int UStampInSecs
+    public static int UnixStampSeconds
     {
         get
         {
@@ -30,7 +30,7 @@ public class Timers : UnitySingleton<Timers> {
     /// <summary>
     /// Unix Time Stamp (время от 1970) в милисекундах
     /// </summary>
-    public static long UStampInMSecs
+    public static long UnixStampMillisecond
     {
         get
         {
@@ -55,35 +55,49 @@ public class Timers : UnitySingleton<Timers> {
     public override void GentleUpdate()
     {
         base.GentleUpdate();
-        foreach (SecondsTimer timer in _data)
+        foreach (Stopwatch timer in _data)
             timer.ProccessEvents();
     }
 
     /// <summary>
-    /// Создать новый таймер, отсчет от сейчас
+    /// Создать секундомер с временем старта от "UnixStampMillisecond"
     /// </summary>
     /// <returns></returns>
-    public ITimer AddTimer<T>() where T : ITimer
+    public Stopwatch AddStopwatch()
     {
-        if (typeof(SecondsTimer).Equals(typeof(T)))
-            return AddSecondsTimer(UStampInSecs);
-
-        return null;
+        return AddStopwatch(UnixStampMillisecond);
     }
 
     /// <summary>
-    /// Создать новый таймер
+    /// Создать секундомер
     /// </summary>
-    /// <param name="startTime"></param>
+    /// <param name="startTime">В милисекундах Unix UTC</param>
     /// <returns></returns>
-    public SecondsTimer AddSecondsTimer(int startTime)
+    public Stopwatch AddStopwatch(long startTime)
     {
-        SecondsTimer newTimer = new SecondsTimer(startTime);
-        newTimer.OnStop += (ITimer timer) => { 
-            _data.Remove(timer);
-            timer = null;    
-        };
-        _data.Add(newTimer);
-        return newTimer;
+        return Add<Stopwatch>(new Stopwatch(startTime));
+    }
+
+    /// <summary>
+    /// Добавить таймер в список
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="timer"></param>
+    /// <returns></returns>
+    public T Add<T>(T timer) where T : Timer
+    {
+        timer.OnStop += OnTimerStop;
+        _data.Add(timer);
+
+        return timer;
+    }
+
+    /// <summary>
+    /// Остановился таймер
+    /// </summary>
+    /// <param name="timer"></param>
+    private void OnTimerStop(ITimer timer)
+    {
+        _data.Remove(timer);
     }
 }
