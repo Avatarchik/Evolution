@@ -58,7 +58,7 @@ public abstract class GentleMonoBeh : MonoBehaviour, IGentleMonoBeh {
     public void SetCPURateOf(int value)
     {
         if (value <= 1)
-            throw new ArgumentException("Znachenie ne mojet bit' <= 1", "Rate");
+            throw new ArgumentException("Значение не может быть <= 1", "Rate");
         Rate = value;
     }
 }

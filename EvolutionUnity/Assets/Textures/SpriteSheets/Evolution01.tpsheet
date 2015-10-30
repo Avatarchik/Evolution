@@ -1,0 +1,15 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: Evolution01.png (256 x 256)
+# $TexturePacker:SmartUpdate:491caa56d59d08b0e31b930c3a53a0c4:1b7f333a7a7f7a1200404f8b3b695684:61e82e4521f5c9cb9643dec5e2ac28c4$
+#
+
+Button;2;204;140;50;0.5;0.5
+Button01;144;204;50;50;0.5;0.5
+Button02;196;204;50;50;0.5;0.5
+FacebookIcon;2;162;32;40;0.5;0.5
+Transparent10x10;2;150;10;10;0.5;0.5

@@ -67,7 +67,7 @@ public class MovingAI : MonoBehaviour {
     /// <summary>
     /// Старт
     /// </summary>
-    void Start()
+    public virtual void Start()
     {
         StartPosition = LocalPosition;
     }
@@ -87,7 +87,7 @@ public class MovingAI : MonoBehaviour {
 
         //Делаем шум волной. Изменяем угол
         if (waveNoise.enabled)
-            moveAngle += waveNoise.Current;
+            moveAngle += waveNoise.Value;
 
         //Обновим позицию себя
         LocalPosition += new Vector3(

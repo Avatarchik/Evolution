@@ -138,6 +138,16 @@ public class Socket : UnitySingleton<Socket> {
     {
         base.Awake();
         SetCustomErrorCodes();
+
+        OnConnectSucceed += () => { };
+        OnConnectFailed += () => { };
+        OnConnectClosed += () => { };
+        OnLoginSucceed += (User user) => { };
+        OnLoginError += (int code) => { };
+        OnRoomJoinSucceed += (Room room) => { };
+        OnRoomJoinError += () => { };
+        OnExtensionResponse += (string cmd, ISFSObject obj) => { };
+        OnServerLog += (LogLevel level, object obj) => { };
     }
 
     /// <summary>
@@ -558,8 +568,9 @@ public class Socket : UnitySingleton<Socket> {
     /// <summary>
     /// Приложение закрылось
     /// </summary>
-    private void OnApplicationQuit()
+    public override void OnApplicationQuit()
     {
+        base.OnApplicationQuit();
         Disconnect();
     }
 }

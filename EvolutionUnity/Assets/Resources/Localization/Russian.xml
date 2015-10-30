@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<words>
+  <word>
+    <key>game_name</key>
+    <represent>Evolution: Agar Online RPG</represent>
+  </word>
+  <word>
+    <key>FB_login</key>
+    <represent>Вход</represent>
+  </word>
+</words>

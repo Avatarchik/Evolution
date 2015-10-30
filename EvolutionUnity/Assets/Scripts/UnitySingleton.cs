@@ -5,8 +5,16 @@
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class UnitySingleton<T> : GentleMonoBeh, IUnitySingleton where T : MonoBehaviour
-{    
+{
+    /// <summary>
+    /// Инстанс локально
+    /// </summary>
     private static T _instance;
+
+    /// <summary>
+    /// Выходим из приложения?
+    /// </summary>
+    public static bool Quiting { get; private set; }
 
     /// <summary>
     /// Ссылка на объект
@@ -58,7 +66,8 @@ public class UnitySingleton<T> : GentleMonoBeh, IUnitySingleton where T : MonoBe
     /// </summary>
     public virtual void OnDestroy()
     {
-        Log.Warning("Unichtojena kopiya: " + name);
+        if (!Quiting)
+            Log.Warning("Уничтожена копия: " + name);
     }
 
     /// <summary>
@@ -77,5 +86,13 @@ public class UnitySingleton<T> : GentleMonoBeh, IUnitySingleton where T : MonoBe
     public override void GentleUpdate()
     {
         
+    }
+
+    /// <summary>
+    /// Выходим из приложения
+    /// </summary>
+    public virtual void OnApplicationQuit()
+    {
+        Quiting = true;
     }
 }

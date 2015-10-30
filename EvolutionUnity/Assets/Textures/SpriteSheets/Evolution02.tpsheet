@@ -1,0 +1,15 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: Evolution02.png (512 x 512)
+# $TexturePacker:SmartUpdate:ad47fa4812500bcdaeb1b4e518a0e8f0:7604a9f91a3ca3f30a7fcd23321b95d7:d92a6be4027afe9e299f4e3a197a171f$
+#
+
+MenuBackground;2;270;427;240;0.5;0.5
+Pentagon01;134;178;85;90;0.5;0.5
+Pentagon02;2;34;98;100;0.5;0.5
+Pentagon03;2;136;130;132;0.5;0.5
+Pentagon04;102;42;91;92;0.5;0.5
