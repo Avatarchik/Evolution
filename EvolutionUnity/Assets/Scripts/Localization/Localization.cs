@@ -21,7 +21,7 @@ public class Localization : UnitySingleton<Localization>, ISavable
     /// <summary>
     /// Список слов
     /// </summary>
-    public Dictionary<string, LocalizationData> words = new Dictionary<string,LocalizationData>();
+    public static Dictionary<string, LocalizationData> words = new Dictionary<string,LocalizationData>();
 
     /// <summary>
     /// Текущий язык
@@ -51,7 +51,7 @@ public class Localization : UnitySingleton<Localization>, ISavable
     /// <summary>
     /// Язык по умолчанию
     /// </summary>
-    public SystemLanguage defaultLanguage = SystemLanguage.English;
+    public static SystemLanguage defaultLanguage = SystemLanguage.English;
 
     /// <summary>
     /// Определять язык через язык системы
@@ -61,7 +61,7 @@ public class Localization : UnitySingleton<Localization>, ISavable
     /// <summary>
     /// Текущий язык, приватно
     /// </summary>
-    private SystemLanguage _currentLanguage;
+    private static SystemLanguage _currentLanguage = SystemLanguage.English;
 
     /// <summary>
     /// Пробуждение
@@ -69,8 +69,16 @@ public class Localization : UnitySingleton<Localization>, ISavable
     public override void Awake()
     {
         base.Awake();
+        Init();
+    }
+
+    /// <summary>
+    /// Инициализация
+    /// </summary>
+    public void Init()
+    {
         if (viaSystemLanguage)
-            _currentLanguage = Application.systemLanguage;
+            defaultLanguage = Application.systemLanguage;
 
         LoadSaves();
     }
@@ -80,7 +88,7 @@ public class Localization : UnitySingleton<Localization>, ISavable
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string Get(string key)
+    public static string Get(string key)
     {
         LocalizationData word;
         if (words.TryGetValue(key, out word))
@@ -94,7 +102,7 @@ public class Localization : UnitySingleton<Localization>, ISavable
     /// <summary>
     /// Читает папку с файлами переводов
     /// </summary>
-    private void ReadFiles()
+    public static void ReadFiles()
     {
         try
         {

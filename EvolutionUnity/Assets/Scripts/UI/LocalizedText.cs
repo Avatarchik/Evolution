@@ -46,9 +46,9 @@ public class LocalizedText : MonoBehaviour
     /// <summary>
     /// Обновился язык
     /// </summary>
-    void OnRefresh()
+    public void OnRefresh()
     {
-        string text = Localization.Instance.Get(key);
+        string text = Localization.Get(key);
         if (upperCase)
             text = text.ToUpper();
         textMesh.text = text;

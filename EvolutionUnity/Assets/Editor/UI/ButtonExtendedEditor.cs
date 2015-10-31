@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 [CustomEditor(typeof(ButtonExtended), true)]
 public class ButtonExtendedEditor : Editor {

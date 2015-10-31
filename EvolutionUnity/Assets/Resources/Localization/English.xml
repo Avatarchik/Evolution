@@ -8,4 +8,8 @@
     <key>FB_login</key>
     <represent>Login</represent>
   </word>
+  <word>
+    <key>FB_logout</key>
+    <represent>Logout</represent>
+  </word>
 </words>
