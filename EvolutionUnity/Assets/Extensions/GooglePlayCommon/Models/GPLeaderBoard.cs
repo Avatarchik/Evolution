@@ -35,7 +35,7 @@ public class GPLeaderBoard  {
 	public GPScoreCollection GlobalCollection  =  new GPScoreCollection();
 
 	public List<GPScore> CurrentPlayerScore =  new List<GPScore>();
-	private Dictionary<int, GP_LocalPlayerScoreUpdateListener> ScoreUpdateListners =  new Dictionary<int, GP_LocalPlayerScoreUpdateListener>();
+	private Dictionary<int, GP_LocalPlayerScoreUpdateListener> _ScoreUpdateListners;
 
 	//--------------------------------------
 	// INITIALIZE
@@ -158,12 +158,12 @@ public class GPLeaderBoard  {
 	}
 
 	public void ReportLocalPlayerScoreUpdate (GPScore score, int requestId) {
-		GP_LocalPlayerScoreUpdateListener listener = ScoreUpdateListners[requestId];
+		GP_LocalPlayerScoreUpdateListener listener = _ScoreUpdateListners[requestId];
 		listener.ReportScoreUpdate(score);
 	}
 
 	public void ReportLocalPlayerScoreUpdateFail(string errorData, int requestId) {
-		GP_LocalPlayerScoreUpdateListener listener = ScoreUpdateListners[requestId];
+		GP_LocalPlayerScoreUpdateListener listener = _ScoreUpdateListners[requestId];
 		listener.ReportScoreUpdateFail(errorData);
 	}
 
@@ -253,6 +253,16 @@ public class GPLeaderBoard  {
 		}
 		set {
 			_Texture = value;
+		}
+	}
+
+	private Dictionary<int, GP_LocalPlayerScoreUpdateListener> ScoreUpdateListners {
+		get {
+			if(_ScoreUpdateListners == null) {
+				_ScoreUpdateListners	=  new Dictionary<int, GP_LocalPlayerScoreUpdateListener>();
+			}
+
+			return _ScoreUpdateListners;
 		}
 	}
 }

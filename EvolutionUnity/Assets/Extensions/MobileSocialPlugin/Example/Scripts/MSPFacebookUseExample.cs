@@ -310,7 +310,7 @@ public class MSPFacebookUseExample : MonoBehaviour {
 		
 		SPFacebook.instance.OnUserDataRequestCompleteAction -= OnUserDataLoaded;
 		
-		if (result.Error == null)  { 
+		if (result.IsSucceeded)  { 
 			SA_StatusBar.text = "User data loaded";
 			IsUserInfoLoaded = true;
 			

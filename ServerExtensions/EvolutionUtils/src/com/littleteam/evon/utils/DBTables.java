@@ -15,4 +15,6 @@ public class DBTables {
      * Таблица пользователи
      */
     public static final String Users = "evon_users";
+    
+    public static final String UsersFacebook = "evon_users_facebook";
 }

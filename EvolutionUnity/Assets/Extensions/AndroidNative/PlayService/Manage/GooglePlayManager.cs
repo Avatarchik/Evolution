@@ -157,13 +157,12 @@ public class GooglePlayManager : SA_Singleton<GooglePlayManager> {
 		AN_GMSGeneralProxy.loadLeaderBoards ();
 	}
 
-	public void UpdatePlayerScoreLocal(string leaderboardId) {
+	public void UpdatePlayerScoreLocal(GPLeaderBoard leaderboard) {
 		if (!GooglePlayConnection.CheckState ()) { return; }
 		int requestId = SA_IdFactory.NextId;
-		GPLeaderBoard leaderboard = GetLeaderBoard(leaderboardId);
 		leaderboard.CreateScoreListener(requestId);
 
-		AN_GMSGeneralProxy.loadLeaderboardInfoLocal(leaderboardId, requestId);
+		AN_GMSGeneralProxy.loadLeaderboardInfoLocal(leaderboard.Id, requestId);
 	}
 
 	[Obsolete("loadPlayerCenteredScores is deprecated, please use LoadPlayerCenteredScores instead.")]
@@ -703,7 +702,7 @@ public class GooglePlayManager : SA_Singleton<GooglePlayManager> {
 		if (result.isSuccess) {
 			Debug.Log("Score was submitted to leaderboard -> " + lb);
 
-			UpdatePlayerScoreLocal(lb.Id);
+			UpdatePlayerScoreLocal(lb);
 		} else {
 			ActionScoreSubmited(result);
 		}

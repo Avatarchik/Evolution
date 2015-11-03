@@ -11,7 +11,7 @@ public class FB_APIResult  {
 
 
 	public FB_APIResult(FBResult result) {
-		if(result.Error != null) {
+		if(result.Error == null) {
 			_IsSucceeded = true;
 			_Data = result.Text;
 		} else {

@@ -6,7 +6,8 @@ using System.Xml.Linq;
 using System.IO;
 using System;
 
-public class Localization : UnitySingleton<Localization>, ISavable
+[DisallowMultipleComponent]
+public sealed class Localization : UnitySingleton<Localization>, ISavable
 {
     /// <summary>
     /// Обновился язык локализации

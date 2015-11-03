@@ -17,7 +17,7 @@ using UnityEditor;
 
 public class AndroidNativeSettings : ScriptableObject {
 
-	public const string VERSION_NUMBER = "7.0.1";
+	public const string VERSION_NUMBER = "7.1.1";
 	public const string GOOGLE_PLAY_SDK_VERSION_NUMBER = "8115000";
 
 
@@ -38,6 +38,13 @@ public class AndroidNativeSettings : ScriptableObject {
 	public bool EnableATCSupport = false;
 
 
+	//Soomla
+	public bool EnableSoomla = false;
+	public string SoomlaDownloadLink = "http://goo.gl/7LYwuj";
+	public string SoomlaDocsLink =  "https://goo.gl/es5j1N";
+	public string SoomlaGameKey = "" ;
+	public string SoomlaEnvKey = "" ;
+
 	public bool SaveCameraImageToGallery = false;
 	public bool UseProductNameAsFolderName = true;
 	public string GalleryFolderName = string.Empty;
@@ -45,8 +52,7 @@ public class AndroidNativeSettings : ScriptableObject {
 	public AN_CameraCaptureType CameraCaptureMode;
 	public AndroidCameraImageFormat ImageFormat = AndroidCameraImageFormat.JPG;
 
-
-	public bool ShowPluginSettings = false;
+	
 	public bool ShowAppPermissions = false;
 	public bool EnableBillingAPI = true;
 	public bool EnablePSAPI = true;
@@ -62,12 +68,7 @@ public class AndroidNativeSettings : ScriptableObject {
 
 
 
-	public bool ShowStoreKitParams = false;
-	public bool ShowCameraAndGalleryParams = false;
-	public bool ShowLocalNotificationParams = false;
-	public bool ShowPushNotificationParams = false;
 	public bool ThirdPartyParams = false;
-	public bool ShowPSSettings = false;
 	public bool ShowPSSettingsResources = false;
 	public bool ShowActions = false;
 	public bool GCMSettingsActinve = false;
@@ -104,6 +105,8 @@ public class AndroidNativeSettings : ScriptableObject {
 
 
 	public string GooglePlayServiceAppID = "0";
+
+	public int ToolbarSelectedIndex = 0;
 
 
 	#if ATC_SUPPORT_ENABLED

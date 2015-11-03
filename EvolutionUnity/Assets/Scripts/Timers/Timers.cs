@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 
-public class Timers : UnitySingleton<Timers> {
+[DisallowMultipleComponent]
+public sealed class Timers : UnitySingleton<Timers> {
     
     /// <summary>
     /// Список таймеров

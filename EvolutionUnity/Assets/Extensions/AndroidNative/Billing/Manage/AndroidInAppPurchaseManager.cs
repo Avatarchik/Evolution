@@ -35,7 +35,7 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 	//--------------------------------------
 	// INITIALIZE
 	//--------------------------------------
-	
+
 	void Awake() {
 		DontDestroyOnLoad(gameObject);
 		_inventory = new AndroidInventory ();
@@ -104,7 +104,9 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 
 	public void Purchase(string SKU, string DeveloperPayload) {
 		_processedSKU = SKU;
+		AN_SoomlaGrow.PurchaseStarted(SKU);
 		AN_BillingProxy.Purchase (SKU, DeveloperPayload);
+
 	}
 
 	[System.Obsolete("subscribe is deprectaed, plase use Subscribe instead")]
@@ -123,6 +125,7 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 
 	public void Subscribe(string SKU, string DeveloperPayload) {
 		_processedSKU = SKU;
+		AN_SoomlaGrow.PurchaseStarted(SKU);
 		AN_BillingProxy.Subscribe (SKU, DeveloperPayload);
 	}
 
@@ -173,6 +176,7 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 		}
 		
 		AN_BillingProxy.Connect (ids, base64EncodedPublicKey);
+
 	}
 
 
@@ -255,7 +259,26 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 		}
 
 
+		//Soomla Analytics
+		if(resp == BillingResponseCodes.BILLING_RESPONSE_RESULT_OK) {
+			GoogleProductTemplate tpl = Inventory.GetProductDetails(purchase.SKU);
+			if(tpl != null) {
+				AN_SoomlaGrow.PurchaseFinished(tpl.SKU, tpl.PriceAmountMicros, tpl.PriceCurrencyCode);
+			} else {
+				AN_SoomlaGrow.PurchaseFinished(purchase.SKU, 0, "USD");
+			}
+		} else {
+
+
+			if(resp == BillingResponseCodes.BILLINGHELPERR_USER_CANCELLED) {
+				AN_SoomlaGrow.PurchaseCanceled(purchase.SKU);
+			} else {
+				AN_SoomlaGrow.PurchaseError();
+			}
+		}
+
 		BillingResult result = new BillingResult (resp, storeData [1], purchase);
+
 
 		ActionProductPurchased(result);
 	}
@@ -304,6 +327,8 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 		_IsConnected = true;
 		_IsConnectingToServiceInProcess = false;
 		BillingResult result = new BillingResult (resp, storeData [1]);
+
+		AN_SoomlaGrow.SetPurhsesSupportedState(result.isSuccess);
 
 		ActionBillingSetupFinished(result);
 	}
@@ -372,21 +397,15 @@ public class AndroidInAppPurchaseManager : SA_Singleton<AndroidInAppPurchaseMana
 				_inventory.Products.Add(tpl);
 			}
 
-			tpl.Price 		  				= storeData[i + 1];
+			tpl.LocalizedPrice 		  		= storeData[i + 1];
 			tpl.Title 	      				= storeData[i + 2];
 			tpl.Description   				= storeData[i + 3];
-			tpl.priceAmountMicros 	      	= storeData[i + 4];
-			tpl.priceCurrencyCode   		= storeData[i + 5];
+			tpl.PriceAmountMicros 	      	= System.Convert.ToInt64(storeData[i + 4]);
+			tpl.PriceCurrencyCode   		= storeData[i + 5];
 			tpl.OriginalJson   				= storeData[i + 6];
 
-			Debug.Log("[OnProducttDetailsRecive]");
-			Debug.Log("SKU: " + tpl.SKU);
-			Debug.Log("Price: " + tpl.Price);
-			Debug.Log("title: " + tpl.Title);
-			Debug.Log("description: " + tpl.Description);
-			Debug.Log("priceAmountMicros: " + tpl.priceAmountMicros);
-			Debug.Log("priceCurrencyCode: " + tpl.priceCurrencyCode);
-			Debug.Log("originalJson: " + tpl.OriginalJson);
+
+			Debug.Log("Prodcut originalJson: " + tpl.OriginalJson);
 		}
 
 		Debug.Log("InAppPurchaseManager, total products loaded: " + _inventory.Products.Count);

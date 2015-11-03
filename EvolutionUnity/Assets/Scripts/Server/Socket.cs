@@ -8,52 +8,55 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
 using MyUtils;
+using Server;
 
-public class Socket : UnitySingleton<Socket> {
+[DisallowMultipleComponent]
+public sealed class Socket : UnitySingleton<Socket>
+{
     /// <summary>
     /// Успешно соеденились
     /// </summary>
-    Action OnConnectSucceed;
+    public Action OnConnectSucceed;
 
     /// <summary>
     /// Не получилось соедениться
     /// </summary>
-    Action OnConnectFailed;
+    public Action OnConnectFailed;
 
     /// <summary>
     /// Соединение закрылось
     /// </summary>
-    Action OnConnectClosed;
+    public Action OnConnectClosed;
 
     /// <summary>
     /// Залогинились успешно
     /// </summary>
-    Action<User> OnLoginSucceed;
+    public Action<User> OnLoginSucceed;
 
     /// <summary>
     /// Залогиниться не удалось
     /// </summary>
-    Action<int> OnLoginError;
+    public Action<int> OnLoginError;
 
     /// <summary>
     /// Успешно вошли в комнату
     /// </summary>
-    Action<Room> OnRoomJoinSucceed;
+    public Action<Room> OnRoomJoinSucceed;
 
     /// <summary>
     /// Не получилось войти в комнату
     /// </summary>
-    Action OnRoomJoinError;
+    public Action OnRoomJoinError;
 
     /// <summary>
     /// Пришел ответ от расширения сервера
     /// </summary>
-    Action<string, ISFSObject> OnExtensionResponse;
+    public Action<string, ISFSObject> OnExtensionResponse;
 
     /// <summary>
     /// Логирование
     /// </summary>
-    Action<LogLevel, object> OnServerLog;
+    public Action<LogLevel, object> OnServerLog;
 
     [System.Serializable]
     public class ConnectionSettings
@@ -71,14 +74,14 @@ public class Socket : UnitySingleton<Socket> {
     /// <summary>
     /// Ссылка на смартфокс
     /// </summary>
-    public SmartFox Server
+    public static SmartFox Server
     {
         get
         {
             return _server;
         }
     }
-    private SmartFox _server;
+    private static SmartFox _server;
 
     /// <summary>
     /// Подключен ли к серверу?
@@ -134,20 +137,12 @@ public class Socket : UnitySingleton<Socket> {
     }
     private bool _isLoging = false;
 
+    private Requests Requests = new Requests();
+
     public override void Awake()
     {
         base.Awake();
         SetCustomErrorCodes();
-
-        OnConnectSucceed += () => { };
-        OnConnectFailed += () => { };
-        OnConnectClosed += () => { };
-        OnLoginSucceed += (User user) => { };
-        OnLoginError += (int code) => { };
-        OnRoomJoinSucceed += (Room room) => { };
-        OnRoomJoinError += () => { };
-        OnExtensionResponse += (string cmd, ISFSObject obj) => { };
-        OnServerLog += (LogLevel level, object obj) => { };
     }
 
     /// <summary>
@@ -354,7 +349,7 @@ public class Socket : UnitySingleton<Socket> {
         ISFSObject loginInData = new SFSObject();
         loginInData.PutUtfString("version", Version.CurrentBundle);
         loginInData.PutUtfString("platform", Application.platform.ToStr());
-        loginInData.PutUtfString("facebookId", "");
+        loginInData.PutUtfString("facebookId", FacebookMy.Instance.LocalUserInfo.Id);
 
         _server.Send(
             new LoginRequest(
@@ -563,6 +558,28 @@ public class Socket : UnitySingleton<Socket> {
         string cmd = (string)be.Params["cmd"];
         if (OnExtensionResponse != null)
             OnExtensionResponse(cmd, data);
+    }
+
+    /// <summary>
+    /// Отправить запрос с пустой информацией
+    /// </summary>
+    /// <param name="type">Тип запроса</param>
+    public void Request(Requests.Types type)
+    {
+        Request(type, new SFSObject());
+    }
+
+    /// <summary>
+    /// Отправить запрос с информацией
+    /// </summary>
+    /// <param name="type">Тип запроса</param>
+    /// <param name="data">Информация</param>
+    public void Request(Requests.Types type, ISFSObject data)
+    {
+        if (IsLoged)
+            Requests.Send(type, data);
+        else
+            Log.Warning("Вы пытаетесь отправить запрос к расширению сервера, но вы не авторизованы!");
     }
 
     /// <summary>

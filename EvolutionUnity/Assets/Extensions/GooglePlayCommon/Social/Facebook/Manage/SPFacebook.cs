@@ -36,6 +36,12 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	
 	
 	//Actinos
+	public event Action OnPostStarted 					= delegate {};
+	public event Action OnLoginStarted 					= delegate {};
+	public event Action OnLogOut 						= delegate {};
+	public event Action OnFriendsRequestStarted 		= delegate {};
+
+
 	public event Action OnInitCompleteAction = delegate {};
 	public event Action<FBPostResult> OnPostingCompleteAction = delegate {};
 	
@@ -80,6 +86,20 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	}
 	
 	public void Init() {
+
+		#if UNITY_ANDROID
+
+		try {
+			Type soomla = Type.GetType("AN_SoomlaGrow");
+			System.Reflection.MethodInfo method  = soomla.GetMethod("Init", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+			
+			method.Invoke(null, null);
+		} catch(Exception ex) {
+			Debug.LogError("AndroidNative. Soomla Initalization failed" + ex.Message);
+		}
+	
+		#endif
+
 		FB.Init(OnInitComplete, OnHideUnity);
 	}
 	
@@ -91,7 +111,7 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	
 	private bool IsLoginRequestSent = false;
 	public void Login(string scopes) {
-		
+		OnLoginStarted();
 		Debug.Log("SPFacebook: making login with teh scopes: "  + scopes);
 		if(!IsLoginRequestSent && !FB.IsLoggedIn) {
 			Debug.Log("AndroidNative login");
@@ -109,25 +129,30 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	
 	
 	public void Logout() {
+		OnLogOut();
 		FB.Logout();
 		IsLoginRequestSent = false;
 		LoginCallbackResult = null;
 	}
-	
-	
-	
-	public void LoadUserData() {
-		if(IsLoggedIn) {
-			
-			FB.API("/me", Facebook.HttpMethod.GET, UserDataCallBack);  
-			
-		} else {
-			
-			Debug.LogWarning("Auth user before loadin data, fail event generated");
-			FB_APIResult res = new FB_APIResult(new  FBResult("","User isn't authed"));
-			OnUserDataRequestCompleteAction(res);
-		}
-	}
+
+    public void LoadUserData()
+    {
+        LoadUserData("id,first_name,last_name,email,locale,location,gender");
+    }
+
+    public void LoadUserData(string fields)
+    {
+        if (IsLoggedIn)
+        {
+            FB.API("/me?fields=" + fields, Facebook.HttpMethod.GET, UserDataCallBack);
+        }
+        else
+        {
+            Debug.LogWarning("Auth user before loadin data, fail event generated");
+            FB_APIResult res = new FB_APIResult(new FBResult("", "User isn't authed"));
+            OnUserDataRequestCompleteAction(res);
+        }
+    }
 
 	public void LoadInvitableFrientdsInfo(int limit) {
 		if(IsLoggedIn) {
@@ -152,6 +177,9 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	}
 
 	public void LoadFrientdsInfo(int limit) {
+
+		OnFriendsRequestStarted();
+
 		if(IsLoggedIn) {
 			
 			FB.API("/me?fields=friends.limit(" + limit.ToString() + ").fields(first_name,id,last_name,name,link,locale,location)", Facebook.HttpMethod.GET, FriendsDataCallBack);  
@@ -176,6 +204,8 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	
 	
 	public void PostImage(string caption, Texture2D image) {
+
+		OnPostStarted();
 		
 		byte[] imageBytes = image.EncodeToPNG();
 		
@@ -189,7 +219,8 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 	
 	
 	public void PostText(string message) {
-		
+		OnPostStarted();
+
 		WWWForm wwwForm = new WWWForm();
 		wwwForm.AddField("message", message);
 		
@@ -240,6 +271,8 @@ public class SPFacebook : SA_Singleton<SPFacebook> {
 		string reference = ""
 		) 
 	{
+
+		OnPostStarted();
 		
 		if(!IsLoggedIn) { 
 			Debug.LogWarning("Auth user before posting, fail event generated");

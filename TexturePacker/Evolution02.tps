@@ -195,6 +195,12 @@
             <filename>../Sources/Textures/Pentagon02.png</filename>
             <filename>../Sources/Textures/Pentagon03.png</filename>
             <filename>../Sources/Textures/Pentagon04.png</filename>
+            <filename>../Sources/Textures/Button01.png</filename>
+            <filename>../Sources/Textures/Button02.png</filename>
+            <filename>../Sources/Textures/FacebookIcon.png</filename>
+            <filename>../Sources/Textures/Transparent10x10.png</filename>
+            <filename>../Sources/Textures/Circle32x32.png</filename>
+            <filename>../Sources/Textures/Circle100x100.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

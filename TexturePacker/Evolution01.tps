@@ -190,11 +190,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../Sources/Textures/Button.png</filename>
-            <filename>../Sources/Textures/FacebookIcon.png</filename>
-            <filename>../Sources/Textures/Button01.png</filename>
-            <filename>../Sources/Textures/Button02.png</filename>
-            <filename>../Sources/Textures/Transparent10x10.png</filename>
+            <filename>../Sources/Textures/Transparent1x1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

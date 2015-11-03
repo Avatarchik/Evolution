@@ -114,11 +114,12 @@ public class SA_RemoveTool  {
 		FileStaticAPI.DeleteFolder (PluginsInstalationUtil.ANDROID_DESTANATION_PATH + "facebook");
 		FileStaticAPI.DeleteFolder (PluginsInstalationUtil.ANDROID_DESTANATION_PATH + "libs");
 		
-		
-		FileStaticAPI.DeleteFolder ("Plugins/Android/res/values/analytics.xml");
-		FileStaticAPI.DeleteFolder ("Plugins/Android/res/values/ids.xml");
-		FileStaticAPI.DeleteFolder ("Plugins/Android/res/values/version.xml");
-		FileStaticAPI.DeleteFolder ("Plugins/Android/res/xml/file_paths.xml");
+		/*
+		FileStaticAPI.DeleteFile ("Plugins/Android/res/values/analytics.xml");
+		FileStaticAPI.DeleteFile ("Plugins/Android/res/values/ids.xml");
+		FileStaticAPI.DeleteFile ("Plugins/Android/res/values/version.xml");
+		FileStaticAPI.DeleteFile ("Plugins/Android/res/xml/file_paths.xml");
+		*/
 	}
 	
 	

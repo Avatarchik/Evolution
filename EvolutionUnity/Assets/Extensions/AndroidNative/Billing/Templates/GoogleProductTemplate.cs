@@ -16,14 +16,21 @@ public class GoogleProductTemplate  {
 	public bool IsOpen = true;
 
 	public string SKU = string.Empty;
-	public string priceAmountMicros = string.Empty;
-	public string priceCurrencyCode = "USD";
+
 
 	private string _OriginalJson = string.Empty;
 
-	[SerializeField]
-	private string _Price = "0.99";
 
+	[SerializeField]
+	private string _LocalizedPrice = "0.99 $";
+
+	[SerializeField]
+	private long   _PriceAmountMicros = 990000;
+
+	[SerializeField]
+	private string _PriceCurrencyCode = "USD";
+
+	
 	[SerializeField]
 	private string _Description = string.Empty;
 
@@ -58,25 +65,76 @@ public class GoogleProductTemplate  {
 	}
 
 	[System.Obsolete("price is deprectaed, please use Price instead")]
-	public string price {
+	public float price {
 		get {
-			return _Price;
+			return Price;
+		} 
+
+	}
+
+	public float Price {
+		get {
+			return _PriceAmountMicros / 1000000f;
 		} 
 		
+
+	}
+
+	[System.Obsolete("priceAmountMicros is deprectaed, please use PriceAmountMicros instead")]
+	public long priceAmountMicros  {
+		get {
+			return _PriceAmountMicros;
+		}
+
 		set {
-			_Price = value;
+			_PriceAmountMicros = value;
 		}
 	}
 
-	public string Price {
+	public long PriceAmountMicros  {
 		get {
-			return _Price;
-		} 
+			return _PriceAmountMicros;
+		}
 		
 		set {
-			_Price = value;
+			_PriceAmountMicros = value;
 		}
 	}
+
+
+
+	[System.Obsolete("priceCurrencyCode is deprectaed, please use PriceCurrencyCode instead")]
+	public string priceCurrencyCode  {
+		get {
+			return _PriceCurrencyCode;
+		}
+
+		set {
+			_PriceCurrencyCode = value;
+		}
+	}
+
+
+	public string PriceCurrencyCode  {
+		get {
+			return _PriceCurrencyCode;
+		}
+		
+		set {
+			_PriceCurrencyCode = value;
+		}
+	}
+
+	public string LocalizedPrice {
+		get {
+			return _LocalizedPrice;
+		}
+
+		set {
+			_LocalizedPrice = value;
+		}
+	}
+
 
 	[System.Obsolete("description is deprectaed, please use Description instead")]
 	public string description {

@@ -9,9 +9,14 @@ public class Test : MonoBehaviour {
 
     void OnEnable()
     {
-        stopwatch = Timers.Instance.AddStopwatch();
-        stopwatch.OnTick += OnTick;
-        stopwatch.OnSecondTick += (long value) => Log.Info("Second: " + value.ToString());
+        //stopwatch = Timers.Instance.AddStopwatch();
+        //stopwatch.OnTick += OnTick;
+        //stopwatch.OnSecondTick += (long value) => Log.Info("Second: " + value.ToString());
+    }
+
+    void Start()
+    {
+        Dialogs.Instance.Show(DialogTypes.Classic);
     }
 
     void OnTick(long value)
@@ -21,6 +26,6 @@ public class Test : MonoBehaviour {
 
     void OnDisable()
     {
-        stopwatch.Stop();
+        //stopwatch.Stop();
     }
 }

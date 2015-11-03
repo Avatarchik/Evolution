@@ -14,6 +14,7 @@ TextureImporter:
     21300014: Button01
     21300016: Button02
     21300018: Transparent10x10
+    21300020: Transparent1x1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,53 +61,13 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Button
+    - name: Transparent1x1
       rect:
         serializedVersion: 2
         x: 2
-        y: 204
-        width: 140
-        height: 50
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 50, y: 0, z: 0, w: 0}
-    - name: Button01
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 204
-        width: 50
-        height: 50
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Button02
-      rect:
-        serializedVersion: 2
-        x: 196
-        y: 204
-        width: 50
-        height: 50
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: FacebookIcon
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 162
-        width: 32
-        height: 40
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Transparent10x10
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 150
-        width: 10
-        height: 10
+        y: 5
+        width: 1
+        height: 1
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

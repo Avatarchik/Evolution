@@ -1264,6 +1264,22 @@ extern "C" {
         [[ISN_NativeUtility sharedInstance] GetLocale];
     }
     
+    
+    void _ISN_RequestGuidedAccessSession(bool enable) {
+        UIAccessibilityRequestGuidedAccessSession(enable, ^(BOOL didSucceed) {
+            if(didSucceed) {
+                 UnitySendMessage("IOSNativeUtility", "OnGuidedAccessSessionRequestResult", "true");
+            } else {
+                 UnitySendMessage("IOSNativeUtility", "OnGuidedAccessSessionRequestResult", "false");
+            }
+        });
+    }
+    
+    bool _ISN_IsGuidedAccessEnabled() {
+      
+        return UIAccessibilityIsGuidedAccessEnabled;
+    }
+    
  
    
     
