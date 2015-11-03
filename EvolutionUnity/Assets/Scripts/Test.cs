@@ -6,26 +6,23 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour {
     Stopwatch stopwatch;
+    Dialog dialog;
 
     void OnEnable()
     {
-        //stopwatch = Timers.Instance.AddStopwatch();
-        //stopwatch.OnTick += OnTick;
-        //stopwatch.OnSecondTick += (long value) => Log.Info("Second: " + value.ToString());
+        stopwatch = Timers.Instance.AddStopwatch();
+        stopwatch.OnSecondTick += OnSecondTick;
+        dialog = Dialogs.Instance.Add(DialogTypes.Classic);
+        Dialogs.Instance.ShowNext();
     }
 
-    void Start()
+    void OnSecondTick(long value)
     {
-        Dialogs.Instance.Show(DialogTypes.Classic);
-    }
-
-    void OnTick(long value)
-    {
-        Log.Info(value);
+        
     }
 
     void OnDisable()
     {
-        //stopwatch.Stop();
+        stopwatch.Stop();
     }
 }
