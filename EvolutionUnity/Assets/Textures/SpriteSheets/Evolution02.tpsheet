@@ -5,18 +5,19 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: Evolution02.png (512 x 512)
-# $TexturePacker:SmartUpdate:c57380a630dbbaf35035d26883b010cb:9ada5325d6390cdd4d3997765225d2ff:d92a6be4027afe9e299f4e3a197a171f$
+# $TexturePacker:SmartUpdate:4e283ad9f0cd65ed939ec00bd0d8a66e:ab9f0f3a35a5d390d87ae65c2ec46e4d:d92a6be4027afe9e299f4e3a197a171f$
 #
 
 Button01;431;460;50;50;0.5;0.5
 Button02;431;408;50;50;0.5;0.5
 Circle32x32;472;280;32;32;0.5;0.5
+CircleTouch;2;34;100;100;0.5;0.5
 FacebookIcon;473;314;32;40;0.5;0.5
 MenuBackground;2;270;427;240;0.5;0.5
-Pentagon01;134;178;85;90;0.5;0.5
-Pentagon02;2;34;98;100;0.5;0.5
+Pentagon01;204;84;85;90;0.5;0.5
+Pentagon02;104;34;98;100;0.5;0.5
 Pentagon03;2;136;130;132;0.5;0.5
-Pentagon04;102;42;91;92;0.5;0.5
+Pentagon04;134;176;91;92;0.5;0.5
 RefreshIcon;431;274;39;38;0.5;0.5
 Square50x50;431;356;50;50;0.5;0.5
 Transparent10x10;506;509;1;1;5;-4

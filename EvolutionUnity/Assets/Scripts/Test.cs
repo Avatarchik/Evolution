@@ -5,24 +5,14 @@ using Sfs2X.Util;
 using UnityEngine.UI;
 
 public class Test : MonoBehaviour {
-    Stopwatch stopwatch;
-    Dialog dialog;
-
-    void OnEnable()
+    public Transform t;
+    public Joystick j;
+    public float spd = 1f;
+    void Update()
     {
-        stopwatch = Timers.Instance.AddStopwatch();
-        stopwatch.OnSecondTick += OnSecondTick;
-        dialog = Dialogs.Instance.Add(DialogTypes.Classic);
-        Dialogs.Instance.ShowNext();
-    }
-
-    void OnSecondTick(long value)
-    {
-        
-    }
-
-    void OnDisable()
-    {
-        stopwatch.Stop();
+        t.localPosition += new Vector3(
+                Mathf.Cos(j.Angle * Mathf.Deg2Rad) * spd * j.Power * Time.deltaTime,
+                Mathf.Sin(j.Angle * Mathf.Deg2Rad) * spd * j.Power * Time.deltaTime,
+                0);
     }
 }

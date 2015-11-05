@@ -19,6 +19,7 @@ TextureImporter:
     21300024: X
     21300026: RefreshIcon
     21300028: WebLinkIcon
+    21300030: CircleTouch
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -95,6 +96,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CircleTouch
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 34
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: FacebookIcon
       rect:
         serializedVersion: 2
@@ -118,8 +129,8 @@ TextureImporter:
     - name: Pentagon01
       rect:
         serializedVersion: 2
-        x: 134
-        y: 178
+        x: 204
+        y: 84
         width: 85
         height: 90
       alignment: 0
@@ -128,7 +139,7 @@ TextureImporter:
     - name: Pentagon02
       rect:
         serializedVersion: 2
-        x: 2
+        x: 104
         y: 34
         width: 98
         height: 100
@@ -148,8 +159,8 @@ TextureImporter:
     - name: Pentagon04
       rect:
         serializedVersion: 2
-        x: 102
-        y: 42
+        x: 134
+        y: 176
         width: 91
         height: 92
       alignment: 0

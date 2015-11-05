@@ -15,6 +15,7 @@ public class Requests {
      */
     public enum Types {
         FacebookUserData,
-        Ping
+        Ping,
+        Pong
     }
 }

@@ -14,6 +14,7 @@ public class Responses {
      * Типы ответов
      */
     public enum Types {
-        Pong
+        Pong,
+        Ping
     }
 }

@@ -30,6 +30,7 @@ public class EvonZoneExtension extends SFSExtension {
         //события клиента
         addRequestHandler(String.valueOf(Requests.Types.FacebookUserData), FacebookUserDataHadler.class);
         addRequestHandler(String.valueOf(Requests.Types.Ping), PingHandler.class);
+        addRequestHandler(String.valueOf(Requests.Types.Pong), PongHandler.class);
         //хук на выключение сервера
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override

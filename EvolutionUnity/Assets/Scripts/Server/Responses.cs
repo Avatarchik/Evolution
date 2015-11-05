@@ -16,7 +16,8 @@
         /// </summary>
         public enum Types
         {
-            Pong
+            Pong,
+            Ping
         }
 
         void Start()

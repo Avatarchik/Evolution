@@ -10,8 +10,6 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.littleteam.evon.utils.*;
 import com.smartfoxserver.v2.entities.data.SFSObject;
-import com.smartfoxserver.v2.entities.variables.SFSUserVariable;
-import com.smartfoxserver.v2.exceptions.SFSVariableException;
 
 /**
  * Слушатель для работы с пингом
@@ -22,14 +20,7 @@ public class PingHandler extends BaseClientRequestHandler {
 
     @Override
     public void handleClientRequest(User user, ISFSObject params) {
-        long serverTime = Time.GetUnixStampMillisecond();
-        long clientTime = params.getLong("time");
-        long ping = Math.abs(serverTime - clientTime);
-        try {
-            user.setVariable(new SFSUserVariable(UserVariables.PING, ping));
-        } catch (SFSVariableException ex) {
-            Log.Warning(getParentExtension(), ex.getMessage());
-        }
+        long serverTime = Time.GetUnixStampMillisecond();        
 
         ISFSObject response = new SFSObject();
         response.putLong("time", serverTime);

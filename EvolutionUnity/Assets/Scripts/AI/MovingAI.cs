@@ -20,7 +20,6 @@ public class MovingAI : MonoBehaviour {
     /// <summary>
     /// Угол в который движемся
     /// </summary>
-    [Range(0,360)]
     public float moveAngle;
 
     /// <summary>

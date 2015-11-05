@@ -34,9 +34,7 @@ public class PingPong : UnitySingleton<PingPong> {
     {
         if (!Socket.Instance.IsLoged)
             return;
-        ISFSObject data = new SFSObject();
-        data.PutLong("time", Timers.UnixStampMillisecond);
-        Socket.Instance.Request(Requests.Types.Ping, data);
+        Socket.Instance.Request(Requests.Types.Ping, new SFSObject());
     }
 
     /// <summary>
@@ -46,18 +44,19 @@ public class PingPong : UnitySingleton<PingPong> {
     /// <param name="data"></param>
     void OnServerResponse(Responses.Types type, ISFSObject data)
     {
-        if (type != Responses.Types.Pong)
-            return;
-        long serverTime = data.GetLong("time");
-        CalculateDelay(serverTime);
-    }
+        if (type == Responses.Types.Pong || type == Responses.Types.Ping)
+        {
+            if (type == Responses.Types.Pong)
+            {
+                ISFSObject request = new SFSObject();
+                request.PutLong("time", data.GetLong("time"));
+                Socket.Instance.Request(Requests.Types.Pong, request);
+            }
 
-    /// <summary>
-    /// Расчитываем задержку
-    /// </summary>
-    /// <param name="serverTime"></param>
-    void CalculateDelay(long serverTime)
-    {
-        Delay = System.Math.Abs(Timers.UnixStampMillisecond - serverTime);
+            if (type == Responses.Types.Ping)
+                Delay = data.GetLong("ping");
+        }
+
+        Log.Info(type.ToStr());
     }
 }

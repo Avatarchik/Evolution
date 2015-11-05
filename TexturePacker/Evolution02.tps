@@ -204,6 +204,7 @@
             <filename>../Sources/Textures/RefreshIcon.png</filename>
             <filename>../Sources/Textures/Circle32x32.png</filename>
             <filename>../Sources/Textures/WebLinkIcon.png</filename>
+            <filename>../Sources/Textures/CircleTouch.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

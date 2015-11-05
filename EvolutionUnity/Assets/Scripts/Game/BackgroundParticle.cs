@@ -12,7 +12,6 @@ public class BackgroundParticle : MovingAI {
     {
         base.Start();
         startedScale = transform.localScale;
-        grow.OnUpperCap += (float value) => grow.enabled = false;
     }
 
     public override void Update()
@@ -32,6 +31,8 @@ public class BackgroundParticle : MovingAI {
         if (grow.enabled)
         {
             float value = grow.Value;
+            if (value == grow.maxValue)
+                grow.enabled = false;
 
             transform.localScale = new Vector3(
                 startedScale.x * value,
