@@ -8,11 +8,12 @@ public class Main : MonoBehaviour {
 
     void Awake()
     {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 60;
 
 #if UNITY_IOS || UNITY_ANDROID
-        if (Utils.IsNiceScreen())
-            ReduceResolutionOf(2);
+        /*if (Utils.IsNiceScreen())
+            ReduceResolutionOf(2);*/
 #endif
     }
 

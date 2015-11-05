@@ -15,14 +15,14 @@ import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
  *
  * @author PanCrucian
  */
-public class LeaveUser extends BaseServerEventHandler {
+public class DisconnectHadler extends BaseServerEventHandler {
+
 
     @Override
-    public void handleServerEvent(ISFSEvent evt) throws SFSException {
-            User user = (User) evt.getParameter(SFSEventParam.USER);
-            /*if(user == null)
-                    Players.GarbageCollector();*/
-            EvonZoneExtension extension = (EvonZoneExtension) getParentExtension();
-            extension.OnUserLeave(user);
+    public void handleServerEvent(ISFSEvent event) throws SFSException {
+        User user = (User) event.getParameter(SFSEventParam.USER);
+        EvonZoneExtension extension = (EvonZoneExtension) getParentExtension();
+        extension.OnUserDisconnect(user);
     }
+
 }

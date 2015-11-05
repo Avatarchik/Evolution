@@ -14,7 +14,8 @@
         /// </summary>
         public enum Types
         {
-            FacebookUserData
+            FacebookUserData,
+            Ping
         }
 
         /// <summary>

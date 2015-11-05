@@ -12,4 +12,32 @@
     <key>FB_logout</key>
     <represent>Logout</represent>
   </word>
+  <word>
+    <key>dialog_coonection_lost_header</key>
+    <represent>Connection lost</represent>
+  </word>
+  <word>
+    <key>dialog_connection_lost_body</key>
+    <represent>Sorry but connection has been lost\nPress "Reconnect" button to reconnect</represent>
+  </word>
+  <word>
+    <key>reconnect_label</key>
+    <represent>Reconnect</represent>
+  </word>
+  <word>
+    <key>dialog_client_update_body</key>
+    <represent>Your client is outdated\nPress "Download" to install the new version</represent>
+  </word>
+  <word>
+    <key>download_label</key>
+    <represent>Download</represent>
+  </word>
+  <word>
+    <key>dialog_client_outdated_header</key>
+    <represent>Client is outdated</represent>
+  </word>
+  <word>
+    <key>dialog_connection_progress_header</key>
+    <represent>Connecting to the server</represent>
+  </word>
 </words>

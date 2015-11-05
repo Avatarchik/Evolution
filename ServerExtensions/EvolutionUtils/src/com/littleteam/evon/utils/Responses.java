@@ -6,11 +6,14 @@
 package com.littleteam.evon.utils;
 
 /**
- *
+ * Ответы от сервера
  * @author PanCrucian
  */
 public class Responses {
+    /**
+     * Типы ответов
+     */
     public enum Types {
-        FacebookAllreadyExist
+        Pong
     }
 }

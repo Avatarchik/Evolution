@@ -3,7 +3,7 @@
 /// </summary>
 public interface IDialog {
     /// <summary>
-    /// Показать
+    /// Начать показывание
     /// </summary>
     void DoShow();
     /// <summary>
@@ -11,13 +11,17 @@ public interface IDialog {
     /// </summary>
     void Show();
     /// <summary>
-    /// Спрятать
+    /// Начать прятание
     /// </summary>
     void DoHide();
     /// <summary>
     /// Установить спрятанным
     /// </summary>
     void Hide();
+    /// <summary>
+    /// Начать уничтожение
+    /// </summary>
+    void DoDestroy();
     /// <summary>
     /// Уничтожить
     /// </summary>

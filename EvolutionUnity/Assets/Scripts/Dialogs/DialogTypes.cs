@@ -1,3 +1,6 @@
 ﻿public enum DialogTypes {
-    Classic
+    Classic,
+    ConnectionLost,
+    ClientUpdate,
+    Connecting
 }

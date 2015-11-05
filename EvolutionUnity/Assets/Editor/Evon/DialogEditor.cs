@@ -14,6 +14,6 @@ public class DialogEditor : Editor {
         if (GUILayout.Button("Спрятать"))
             dialog.DoHide();
         if (GUILayout.Button("Уничтожить"))
-            dialog.Destroy();
+            dialog.DoDestroy();
     }
 }

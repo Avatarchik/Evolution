@@ -47,7 +47,7 @@ public class UnitySingleton<T> : GentleMonoBeh, IUnitySingleton where T : MonoBe
     private void DestroyMySelfIfExist()
     {
         if (_instance != null)
-            if (_instance != this)
+            if (_instance.gameObject != gameObject)
                 Destroy(gameObject);
     }
 
@@ -58,7 +58,7 @@ public class UnitySingleton<T> : GentleMonoBeh, IUnitySingleton where T : MonoBe
     {
         CheckAndSetForInstance();
         DestroyMySelfIfExist();
-        DontDestroyOnLoad(this);        
+        DontDestroyOnLoad(gameObject);        
     }
 
     /// <summary>

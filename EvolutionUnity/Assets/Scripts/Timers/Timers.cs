@@ -46,7 +46,7 @@ public sealed class Timers : UnitySingleton<Timers> {
     {
         get
         {
-            return DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1).ToUniversalTime());
+            return DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc));
         }
     }
 
@@ -56,7 +56,7 @@ public sealed class Timers : UnitySingleton<Timers> {
     public override void GentleUpdate()
     {
         base.GentleUpdate();
-        foreach (Stopwatch timer in _data)
+        foreach (ITimer timer in _data)
             timer.ProccessEvents();
     }
 

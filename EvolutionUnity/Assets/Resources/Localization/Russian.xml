@@ -12,4 +12,32 @@
     <key>FB_logout</key>
     <represent>Выход</represent>
   </word>
+  <word>
+    <key>dialog_coonection_lost_header</key>
+    <represent>Соединение потеряно</represent>
+  </word>
+  <word>
+    <key>dialog_connection_lost_body</key>
+    <represent>Извините, но вас отключили\nНажите "Ещё разок" для переподключения</represent>
+  </word>
+  <word>
+    <key>reconnect_label</key>
+    <represent>Ещё разок</represent>
+  </word>
+  <word>
+    <key>dialog_client_update_body</key>
+    <represent>Версия клиента устарела\nНажмите "Скачать" и установите новую версию игры</represent>
+  </word>
+  <word>
+    <key>download_label</key>
+    <represent>Скачать</represent>
+  </word>
+  <word>
+    <key>dialog_client_outdated_header</key>
+    <represent>Клиент устарел</represent>
+  </word>
+  <word>
+    <key>dialog_connection_progress_header</key>
+    <represent>Соединение с сервером</represent>
+  </word>
 </words>

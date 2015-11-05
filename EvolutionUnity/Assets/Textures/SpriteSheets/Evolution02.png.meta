@@ -15,6 +15,10 @@ TextureImporter:
     21300016: Transparent10x10
     21300018: Circle32x32
     21300020: Circle100x100
+    21300022: Square50x50
+    21300024: X
+    21300026: RefreshIcon
+    21300028: WebLinkIcon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -81,21 +85,11 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Circle100x100
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 34
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Circle32x32
       rect:
         serializedVersion: 2
-        x: 465
-        y: 374
+        x: 472
+        y: 280
         width: 32
         height: 32
       alignment: 0
@@ -104,8 +98,8 @@ TextureImporter:
     - name: FacebookIcon
       rect:
         serializedVersion: 2
-        x: 431
-        y: 366
+        x: 473
+        y: 314
         width: 32
         height: 40
       alignment: 0
@@ -124,8 +118,8 @@ TextureImporter:
     - name: Pentagon01
       rect:
         serializedVersion: 2
-        x: 204
-        y: 84
+        x: 134
+        y: 178
         width: 85
         height: 90
       alignment: 0
@@ -134,7 +128,7 @@ TextureImporter:
     - name: Pentagon02
       rect:
         serializedVersion: 2
-        x: 104
+        x: 2
         y: 34
         width: 98
         height: 100
@@ -154,22 +148,62 @@ TextureImporter:
     - name: Pentagon04
       rect:
         serializedVersion: 2
-        x: 134
-        y: 176
+        x: 102
+        y: 42
         width: 91
         height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RefreshIcon
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 274
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Square50x50
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 356
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Transparent10x10
       rect:
         serializedVersion: 2
-        x: 483
+        x: 506
         y: 509
         width: 1
         height: 1
       alignment: 9
       pivot: {x: 5, y: -4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: WebLinkIcon
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 314
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: X
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 489
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

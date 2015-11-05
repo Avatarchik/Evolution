@@ -14,6 +14,11 @@ using Server;
 public sealed class Socket : UnitySingleton<Socket>
 {
     /// <summary>
+    /// Событие инициализации
+    /// </summary>
+    public Action OnInited;
+
+    /// <summary>
     /// Успешно соеденились
     /// </summary>
     public Action OnConnectSucceed;
@@ -36,7 +41,7 @@ public sealed class Socket : UnitySingleton<Socket>
     /// <summary>
     /// Залогиниться не удалось
     /// </summary>
-    public Action<int> OnLoginError;
+    public Action<int, string> OnLoginError;
 
     /// <summary>
     /// Успешно вошли в комнату
@@ -58,6 +63,9 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     public Action<LogLevel, object> OnServerLog;
 
+    /// <summary>
+    /// Класс настроек
+    /// </summary>
     [System.Serializable]
     public class ConnectionSettings
     {
@@ -67,8 +75,12 @@ public sealed class Socket : UnitySingleton<Socket>
         public string ZoneName = "Evon";
         public string RoomName = "Default";
         public bool Debug = false;
+        public float maxConnectingTime = 5f;
     }
 
+    /// <summary>
+    /// Настройки
+    /// </summary>
     public ConnectionSettings Settings;
     
     /// <summary>
@@ -81,6 +93,9 @@ public sealed class Socket : UnitySingleton<Socket>
             return _server;
         }
     }
+    /// <summary>
+    /// Ссылка на Смартфокс
+    /// </summary>
     private static SmartFox _server;
 
     /// <summary>
@@ -118,10 +133,13 @@ public sealed class Socket : UnitySingleton<Socket>
         {
             if (_server == null)
                 return false;
-            return _isLogged;
+            return _isLoged;
         }
     }
-    private bool _isLogged = false;
+    /// <summary>
+    /// Залогинены?
+    /// </summary>
+    private bool _isLoged = false;
 
     /// <summary>
     /// Идет процесс логина?
@@ -135,10 +153,24 @@ public sealed class Socket : UnitySingleton<Socket>
             return _isLoging;
         }
     }
+    /// <summary>
+    /// Идет процесс логина?
+    /// </summary>
     private bool _isLoging = false;
 
+    /// <summary>
+    /// Ссылка на объект который работает с запросами к серверу
+    /// </summary>
     private Requests Requests = new Requests();
 
+    /// <summary>
+    /// Секундомер который считает время затраченное на соединение
+    /// </summary>
+    private Stopwatch connectingStopwatch;
+
+    /// <summary>
+    /// Пробуждение
+    /// </summary>
     public override void Awake()
     {
         base.Awake();
@@ -155,6 +187,9 @@ public sealed class Socket : UnitySingleton<Socket>
         SFSErrorCodes.SetErrorMessage(1002, "Incorrect username lenght. Username: {0}");
     }
 
+    /// <summary>
+    /// Update физики
+    /// </summary>
     void FixedUpdate()
     {
         if (_server != null)
@@ -164,8 +199,11 @@ public sealed class Socket : UnitySingleton<Socket>
     /// <summary>
     /// Инициализирую сервер. Добавляю слушатели. Соединяемся
     /// </summary>
-    public void Init()
+    /// <returns>Запустились ли методы?</returns>
+    public bool Init()
     {
+        if (IsConnected || IsConnecting)
+            return false;
         _server = new SmartFox();
         _server.ThreadSafeMode = true;
 
@@ -186,6 +224,22 @@ public sealed class Socket : UnitySingleton<Socket>
         _server.AddLogListener(LogLevel.ERROR, OnLogMessageError);
 
         Connect();
+
+        if (OnInited != null)
+            OnInited();
+        return true;
+    }
+
+    private void CoonectingStopwatchTick(long time)
+    {
+        if (time / 1000 >= Settings.maxConnectingTime)
+            ConnectFailed();
+    }
+
+    void StopConnectingStopwatch()
+    {
+        if (!connectingStopwatch.IsStoped)
+            connectingStopwatch.Stop();
     }
 
     /// <summary>
@@ -193,6 +247,7 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void Reset()
     {
+        StopConnectingStopwatch();        
         _server.RemoveEventListener(SFSEvent.CONNECTION, OnConnection);
         _server.RemoveEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
 
@@ -219,7 +274,7 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void ResetVariables()
     {
-        _isLogged = false;
+        _isLoged = false;
         _isLoging = false;
     }
 
@@ -244,10 +299,8 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void Connect()
     {
-        if (!HasServerInstance())
-            return;
-        if (IsConnected || IsConnecting)
-            return;
+        connectingStopwatch = Timers.Instance.AddStopwatch();
+        connectingStopwatch.OnSecondTick += CoonectingStopwatchTick;
 
         ConfigData cfg = new ConfigData();
         cfg.Host = Settings.Host;
@@ -307,6 +360,7 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void ConnectSucceed()
     {
+        StopConnectingStopwatch();
         if (OnConnectSucceed != null)
             OnConnectSucceed();
         Login();
@@ -317,9 +371,10 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void ConnectFailed()
     {
+        Reset();
+
         if (OnConnectFailed != null)
             OnConnectFailed();
-        Reset();
     }
 
     /// <summary>
@@ -327,9 +382,10 @@ public sealed class Socket : UnitySingleton<Socket>
     /// </summary>
     private void ConnectClosed()
     {
+        Reset();
+
         if (OnConnectClosed != null)
             OnConnectClosed();
-        Reset();
     }
     #endregion
 
@@ -383,7 +439,7 @@ public sealed class Socket : UnitySingleton<Socket>
     private void OnLoginToServerError(BaseEvent be)
     {
         LogMessage(LogLevel.INFO, "Login failed: " + (string)be.Params["errorMessage"]);
-        LoginError(Convert.ToInt32(be.Params["errorCode"]));
+        LoginError(Convert.ToInt32(be.Params["errorCode"]), (string)be.Params["errorMessage"]);
     }
 
     /// <summary>
@@ -393,7 +449,7 @@ public sealed class Socket : UnitySingleton<Socket>
     private void LoginSucceed(User user)
     {
         _isLoging = false;
-        _isLogged = true;
+        _isLoged = true;
         if (OnLoginSucceed != null)
             OnLoginSucceed(user);
         RoomDefaultJoin();
@@ -402,11 +458,11 @@ public sealed class Socket : UnitySingleton<Socket>
     /// <summary>
     /// Ошибка при логине
     /// </summary>
-    private void LoginError(int code)
+    private void LoginError(int code, string message)
     {
         _isLoging = false;
         if (OnLoginError != null)
-            OnLoginError(code);
+            OnLoginError(code, message);
         Disconnect();
     }
     #endregion

@@ -30,6 +30,8 @@ public class Stopwatch : Timer
         _startTime = startTime;
     }
 
+    public bool IsStoped { get; private set; }
+
     /// <summary>
     /// Сколько прошли милисекунд
     /// </summary>
@@ -46,6 +48,9 @@ public class Stopwatch : Timer
     /// </summary>
     public override void ProccessEvents()
     {
+        if (IsStoped)
+            return;
+
         if (OnTick != null)
             OnTick(Passed);
 
@@ -64,6 +69,7 @@ public class Stopwatch : Timer
     /// </summary>
     public override void Stop()
     {
+        IsStoped = true;
         if (OnStop != null)
             OnStop(this);
     }

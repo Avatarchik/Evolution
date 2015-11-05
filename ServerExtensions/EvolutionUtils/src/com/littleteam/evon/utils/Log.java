@@ -9,12 +9,13 @@ import com.smartfoxserver.v2.extensions.ExtensionLogLevel;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
 /**
- *
+ * Логирование
  * @author PanCrucian
  */
 public class Log {
 
     /**
+     * Информация
      * @param extension - расширение
      * @param message - сообщение
      */
@@ -23,6 +24,7 @@ public class Log {
     }
 
     /**
+     * Опасность
      * @param extension - расширение
      * @param message - сообщение
      */
@@ -31,6 +33,7 @@ public class Log {
     }
 
     /**
+     * Ошибка
      * @param extension - расширение
      * @param message - сообщение
      */

@@ -17,7 +17,6 @@ import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.exceptions.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -27,6 +26,7 @@ import java.sql.SQLException;
 public class LoginEventHandler extends BaseServerEventHandler {
 
     private class LoginData {
+
         String deviceId = "";
         String version = "";
         String platform = "";
@@ -45,6 +45,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
         loginData.version = customData.getUtfString("version");
         loginData.platform = customData.getUtfString("platform");
         loginData.facebookId = customData.getUtfString("facebookId");
+        int currentTime = Time.GetUnixStampSeconds();
 
         //проверим длину имени
         if (loginData.deviceId.length() != 32) {
@@ -83,8 +84,10 @@ public class LoginEventHandler extends BaseServerEventHandler {
                 stmt = conn.prepareStatement(
                         "INSERT INTO `" + DBTables.Users + "` "
                         + "SET "
-                        + "device_id = ?");
+                        + "device_id = ?,"
+                        + "time_create = ?");
                 stmt.setString(1, loginData.deviceId);
+                stmt.setInt(2, currentTime);
                 stmt.executeUpdate();
 
                 stmt = conn.prepareStatement("SELECT * FROM " + DBTables.Users + " WHERE device_id = ?");
@@ -112,12 +115,12 @@ public class LoginEventHandler extends BaseServerEventHandler {
                 dbError = true;
             }
         }
-        
+
         //были ошибки при запросе к БД, нельзя продолжать
         if (dbError) {
             throw new SFSLoginException("Database problem", new SFSErrorData(SFSErrorCodeExtended.DATABASE_ERROR));
         }
-        
+
         ISFSObject userObject = resultArr.getSFSObject(0);
         String name = (String) event.getParameter(SFSEventParam.LOGIN_NAME);
         ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);

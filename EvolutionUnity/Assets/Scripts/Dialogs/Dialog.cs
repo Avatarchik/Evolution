@@ -6,13 +6,27 @@ using System;
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
 [DisallowMultipleComponent]
-public class Dialog : MonoBehaviour, IDialog {
-
+public class Dialog : MonoBehaviour, IDialog 
+{
+    /// <summary>
+    /// Показался
+    /// </summary>
     public Action<Dialog> OnShowed;
+    /// <summary>
+    /// Спрятался
+    /// </summary>
     public Action<Dialog> OnHided;
+    /// <summary>
+    /// Был уничтожен
+    /// </summary>
     public Action<Dialog> OnDestroyed;
-    public Action<Dialog> OnDestroy;
-
+    /// <summary>
+    /// Начало уничтожения
+    /// </summary>
+    public Action<Dialog> OnDestroyStarted;
+    /// <summary>
+    /// Состояния
+    /// </summary>
     public enum States
     {
         Hided,
@@ -20,7 +34,9 @@ public class Dialog : MonoBehaviour, IDialog {
         Showed,
         Hiding
     }
-
+    /// <summary>
+    /// Ссылка на состояния
+    /// </summary>
     public States state = States.Showed;
 
     /// <summary>
@@ -45,28 +61,50 @@ public class Dialog : MonoBehaviour, IDialog {
     public RectTransform RectTransform;
 
     /// <summary>
-    /// Анимационный float
+    /// Анимационный float как пресет
     /// </summary>
-    public AnimatedFloat fadeFloatPreset;
+    public AnimatedFloat fadeFloatPreset = new AnimatedFloat() { enabled = true, smooth = true, changeSpeed = 10f, minValue = 0, maxValue = 1f };
 
+    /// <summary>
+    /// Анимационный float 
+    /// </summary>
     private AnimatedFloat fadeFloat;
 
-    private Vector2 StartBodyPosition
+    /// <summary>
+    /// Начальная позиция диалога
+    /// </summary>
+    public Vector2 StartBodyPosition
     {
         get
         {
-            return new Vector2(Camera.main.pixelWidth * -1f, Body.anchoredPosition.y);
+            return new Vector2(Screen.width * -1f, Body.anchoredPosition.y);
         }
     }
 
-    private Vector2 EndBodyPosition
+    /// <summary>
+    /// Конечная позиция диалога
+    /// </summary>
+    public Vector2 EndBodyPosition
     {
         get
         {
-            return new Vector2(Camera.main.pixelWidth, Body.anchoredPosition.y);
+            return new Vector2(Screen.width, Body.anchoredPosition.y);
         }
     }
 
+    /// <summary>
+    /// TextMesh заголовка
+    /// </summary>
+    public Text headerLabel;
+
+    /// <summary>
+    /// TextMesh тела
+    /// </summary>
+    public Text bodyLabel;
+
+    /// <summary>
+    /// Старт
+    /// </summary>
     public virtual void Start()
     {
         RectTransform = GetComponent<RectTransform>();
@@ -75,6 +113,9 @@ public class Dialog : MonoBehaviour, IDialog {
         RectTransform.sizeDelta = Vector2.zero;
     }
 
+    /// <summary>
+    /// Каждый кадр
+    /// </summary>
     public virtual void Update()
     {
         float offset = 0;
@@ -99,6 +140,10 @@ public class Dialog : MonoBehaviour, IDialog {
         MoveBodyTo(targetPosition);
     }
 
+    /// <summary>
+    /// Двигать тело диалога к позиции
+    /// </summary>
+    /// <param name="pos"></param>
     void MoveBodyTo(Vector2 pos)
     {
         Body.anchoredPosition = new Vector2(
@@ -107,6 +152,9 @@ public class Dialog : MonoBehaviour, IDialog {
             );
     }
 
+    /// <summary>
+    /// Начать анимацию показа
+    /// </summary>
     public virtual void DoShow()
     {
         fadeFloat = fadeFloatPreset.CloneProperties();
@@ -116,6 +164,9 @@ public class Dialog : MonoBehaviour, IDialog {
         state = States.Showing;
     }
 
+    /// <summary>
+    /// Показать
+    /// </summary>
     public virtual void Show()
     {
         state = States.Showed;
@@ -126,6 +177,9 @@ public class Dialog : MonoBehaviour, IDialog {
             OnShowed(this);
     }
 
+    /// <summary>
+    /// Начать анимацию сокрытия
+    /// </summary>
     public virtual void DoHide()
     {
         fadeFloat = fadeFloatPreset.CloneProperties();
@@ -135,6 +189,9 @@ public class Dialog : MonoBehaviour, IDialog {
         state = States.Hiding;
     }
 
+    /// <summary>
+    /// Скрыть
+    /// </summary>
     public virtual void Hide()
     {
         state = States.Hided;
@@ -145,17 +202,68 @@ public class Dialog : MonoBehaviour, IDialog {
             OnHided(this);
     }
 
-    public virtual void Destroy()
+    /// <summary>
+    /// Начать уничтожение
+    /// </summary>
+    public virtual void DoDestroy()
     {
         OnHided += (Dialog d) =>
         {
-            if (d.OnDestroyed != null)
-                d.OnDestroyed(this);
-
-            Destroy(d.gameObject);
+            Destroy();
         };
         DoHide();
-        if (OnDestroy != null)
-            OnDestroy(this);
+
+        if (OnDestroyStarted != null)
+            OnDestroyStarted(this);
+    }
+
+    /// <summary>
+    /// Уничтожить
+    /// </summary>
+    public void Destroy()
+    {
+        if (OnDestroyed != null)
+            OnDestroyed(this);
+
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Установить текст для тела
+    /// </summary>
+    /// <param name="text"></param>
+    public void SetBodyText(string text)
+    {
+        LocalizedText locText = bodyLabel.GetComponent<LocalizedText>();
+        if (locText != null)
+            Destroy(locText);
+        bodyLabel.text = text;
+    }
+
+    /// <summary>
+    /// Установить текст для заголовка
+    /// </summary>
+    /// <param name="text"></param>
+    public void SetHeaderText(string text)
+    {
+        LocalizedText locText = headerLabel.GetComponent<LocalizedText>();
+        if (locText != null)
+            Destroy(locText);
+        headerLabel.text = text;
+    }
+
+    /// <summary>
+    /// Диалог показан или показывается
+    /// </summary>
+    public bool IsShowedOrShowing
+    {
+        get
+        {
+            if (state == States.Showed)
+                return true;
+            if (state == States.Showing)
+                return true;
+            return false;
+        }
     }
 }

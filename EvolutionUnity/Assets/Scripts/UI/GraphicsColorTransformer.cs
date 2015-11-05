@@ -25,7 +25,7 @@ public class GraphicsColorTransformer : GentleMonoBeh {
     public override void GentleUpdate()
     {
         Color c = new Color(
-            Mathf.Lerp(from.r, to.r, offset),            
+            Mathf.Lerp(from.r, to.r, offset),
             Mathf.Lerp(from.g, to.g, offset),
             Mathf.Lerp(from.b, to.b, offset),
             Mathf.Lerp(from.a, to.a, offset)

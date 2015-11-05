@@ -6,11 +6,15 @@
 package com.littleteam.evon.utils;
 
 /**
- *
+ * Запросы к серверу
  * @author PanCrucian
  */
 public class Requests {
+    /**
+     * Типы запросов
+     */
     public enum Types {
-        FacebookUserData
+        FacebookUserData,
+        Ping
     }
 }

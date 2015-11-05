@@ -2,6 +2,10 @@ package com.littleteam.evon.utils;
 
 import com.smartfoxserver.v2.exceptions.IErrorCode;
 
+/**
+ * Расширенный enum ошибок для смартфокса
+ * @author PanCrucian
+ */
 public enum SFSErrorCodeExtended implements IErrorCode {    
     VERSION_NOT_VALID(1000),
     DATABASE_ERROR(1001),

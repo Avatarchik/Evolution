@@ -12,10 +12,8 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
-import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
-import com.smartfoxserver.v2.util.ClientDisconnectionReason;
-import com.smartfoxserver.v2.util.IDisconnectionReason;
+import com.smartfoxserver.v2.util.ClientDisconnectionReason;;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -30,8 +28,8 @@ public class FacebookUserDataHadler extends BaseClientRequestHandler {
     PreparedStatement stmt;
 
     @Override
-    public void handleClientRequest(User user, ISFSObject data) {
-        FacebookUserInfoMy facebookUserInfo = (FacebookUserInfoMy) data.getClass("FacebookUserInfoMy");
+    public void handleClientRequest(User user, ISFSObject params) {
+        FacebookUserInfoMy facebookUserInfo = (FacebookUserInfoMy) params.getClass("FacebookUserInfoMy");
         if (facebookUserInfo.Id.length() == 0) {
             Log.Info(getParentExtension(), "facebookId lenght <= zero");
             return;
@@ -155,14 +153,14 @@ public class FacebookUserDataHadler extends BaseClientRequestHandler {
         if (facebookObject == null) {
             Log.Error(
                     getParentExtension(),
-                    "В БД больше двух аккаунтов фейсбук с одинаковым ID: " + facebookUserInfo.Id + ". Это Баг FacebookUserDataHadler"
+                    "В БД больше двух аккаунтов фейсбук с одинаковым ID: " + facebookUserInfo.Id + ". Это Баг " + FacebookUserDataHadler.class.getName()
             );
             user.disconnect(ClientDisconnectionReason.KICK);
             return;
         }
 
         if (userObject == null) {
-            Log.Error(getParentExtension(), "Юзер не найден в БД, это баг FacebookUserDataHadler");
+            Log.Error(getParentExtension(), "Юзер не найден в БД, это баг " + FacebookUserDataHadler.class.getName());
             user.disconnect(ClientDisconnectionReason.KICK);
             return;
         }

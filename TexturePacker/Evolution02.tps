@@ -199,8 +199,11 @@
             <filename>../Sources/Textures/Button02.png</filename>
             <filename>../Sources/Textures/FacebookIcon.png</filename>
             <filename>../Sources/Textures/Transparent10x10.png</filename>
+            <filename>../Sources/Textures/Square50x50.png</filename>
+            <filename>../Sources/Textures/X.png</filename>
+            <filename>../Sources/Textures/RefreshIcon.png</filename>
             <filename>../Sources/Textures/Circle32x32.png</filename>
-            <filename>../Sources/Textures/Circle100x100.png</filename>
+            <filename>../Sources/Textures/WebLinkIcon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
