@@ -26,7 +26,6 @@ import java.sql.SQLException;
 public class LoginEventHandler extends BaseServerEventHandler {
 
     private class LoginData {
-
         String deviceId = "";
         String version = "";
         String platform = "";
